@@ -1,3 +1,20 @@
+/**
+ * REQUIREMENTS
+ * =============
+ *
+ * should be able to create promise by calling constructor
+ * const p = new Promise((resolve, reject) => {...})
+ *
+ * should be able to apply .then()
+ * p.then((res) => {})
+ *
+ * should be able to apply .catch()
+ * p.catch((res) => {})
+ *
+ * should be able to chain promise
+ * p.then(() => {}).then(() => {})
+ */
+
 const STATES = {
   PENDING: 'pending',
   REJECTED: 'rejected',
@@ -76,12 +93,6 @@ class CustomPromise {
   }
 }
 
-//Basic Promise APIs
-/**
- * should be able to create promise by calling constructor
- * const p = new Promise((resolve, reject) => {...})
- */
-
 const p = new CustomPromise((resolve, reject) => {
   setTimeout(() => {
     if (Math.random() > 0.5) {
@@ -91,19 +102,3 @@ const p = new CustomPromise((resolve, reject) => {
     }
   }, 1000)
 })
-
-/**
- * should be able to apply .then()
- * p.then((res) => {})
- */
-
-// p.then((res) => {
-//   console.log('inside then ', res)
-// }).catch((err) => {
-//   console.log('inside catch ', err)
-// })
-
-/**
- * should be able to apply .catch()
- * p.catch((res) => {})
- */
