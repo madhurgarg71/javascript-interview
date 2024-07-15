@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Throttle Example</title>
+  </head>
+  <body>
+    <input id="demo" type="text" />
+    <h1 id="showText"></h1>
+    <script src="../../coding/throttle.js"></script>
+    <script>
+      var $text = document.getElementById('showText')
+      function printText(val) {
+        $text.innerText = val
+      }
+
+      const throttledPrint = throttle(printText, 1000)
+      throttledPrint('m')
+      setTimeout(() => {
+        throttledPrint('a')
+      }, 1500)
+      setTimeout(() => {
+        throttledPrint('d')
+      }, 2800)
+      setTimeout(() => {
+        throttledPrint('h')
+      }, 3900)
+      setTimeout(() => {
+        throttledPrint('a')
+      }, 4000)
+      setTimeout(() => {
+        throttledPrint('v')
+      }, 4200)
+      setTimeout(() => {
+        throttledPrint('i')
+      }, 6000)
+    </script>
+  </body>
+</html>

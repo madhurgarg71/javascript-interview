@@ -1,43 +1,43 @@
 const promiseAll = function (promises) {
   return new Promise(function (resolve, reject) {
-    var results = []
+    var errors = []
     var remaining = promises.length
 
     if (remaining === 0) {
-      resolve(results)
+      reject(errors)
     }
 
-    function handleResult(index, value) {
-      results[index] = value
+    function handleResult(value) {
+      resolve(value)
+    }
+
+    function handleError(index, error) {
+      errors[index] = error
       remaining--
 
       if (remaining === 0) {
-        resolve(results)
+        reject(errors)
       }
-    }
-
-    function handleError(error) {
-      reject(error)
     }
 
     for (var i = 0; i < promises.length; i++) {
       Promise.resolve(promises[i])
-        .then(handleResult.bind(null, i))
-        .catch(handleError)
+        .then(handleResult)
+        .catch(handleError.bind(null, i))
     }
   })
 }
 
 const p1 = new Promise((resolve, reject) => {
-  setTimeout(resolve, 1000, 'one')
+  setTimeout(reject, 1000, 'one')
 })
 
 const p2 = new Promise((resolve, reject) => {
-  setTimeout(resolve, 4000, 'two')
+  setTimeout(reject, 4000, 'two')
 })
 
 const p3 = new Promise((resolve, reject) => {
-  setTimeout(resolve, 2000, 'three')
+  setTimeout(reject, 2000, 'three')
 })
 
 const ans = promiseAll([p1, p2, p3])

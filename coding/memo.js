@@ -1,8 +1,10 @@
 function memo(fn) {
   const cache = {}
   return function (...args) {
-    const key = args.join('-')
-    if (cache[key]) {
+    const key = JSON.stringify(args)
+    console.log('key', key)
+    //why not use cache.hasOwnProperty(key)?
+    if (key in cache) {
       return cache[key]
     }
     cache[key] = fn.apply(this, args)

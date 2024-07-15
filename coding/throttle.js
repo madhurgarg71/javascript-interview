@@ -1,13 +1,26 @@
-function throttle(fn, LIMIT = 500) {
-  let limitCrossed = true
-  return function (...args) {
-    if (limitCrossed) {
-      fn.apply(this, args)
-      limitCrossed = false
+var throttle = function (fn, t) {
+  let shouldWait = false
+  let waitingArgs
+  const timeoutFunc = function () {
+    console.log(waitingArgs)
+    if (waitingArgs === null) {
+      shouldWait = false
     } else {
-      setTimeout(() => {
-        limitCrossed = true
-      }, LIMIT)
+      fn(...waitingArgs)
+      waitingArgs = null
+      setTimeout(timeoutFunc, t)
     }
+  }
+
+  return function (...args) {
+    console.log(...args)
+    if (shouldWait) {
+      waitingArgs = args
+      return
+    }
+
+    fn(...args)
+    shouldWait = true
+    setTimeout(timeoutFunc, t)
   }
 }
