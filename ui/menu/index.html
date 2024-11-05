@@ -15,5 +15,22 @@
   <body>
     <div id="app"></div>
     <script type="module" src="./app.js"></script>
+    <script>
+      fetch("https://jsonplaceholder.typicode.com/todos/1")
+        .then((response) => response.json())
+        .then((json) => console.log(json))
+    </script>
+    <script>
+      window.addEventListener("beforeunload", function (event) {
+        // Custom message to display in older browsers
+        const message = "Are you sure you want to leave?"
+
+        // Set the returnValue property of the event to show a confirmation dialog
+        event.returnValue = message
+
+        // For modern browsers, return the message to display a confirmation dialog
+        return message
+      })
+    </script>
   </body>
 </html>

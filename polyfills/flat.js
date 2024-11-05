@@ -9,5 +9,5 @@ Array.prototype._flat = function (depth = 1) {
   }, [])
 }
 
-const arr = [[1, 2, [3, 4]]]
+const arr = [1, 2, [3, 4]]
 console.log(arr._flat(2))

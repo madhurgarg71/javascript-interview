@@ -1,8 +1,8 @@
 function memo(fn) {
-  const cache = {}
-  return function (...args) {
+  let cache = {}
+  const memoizedFn = function (...args) {
     const key = JSON.stringify(args)
-    console.log('key', key)
+    console.log(key)
     //why not use cache.hasOwnProperty(key)?
     if (key in cache) {
       return cache[key]
@@ -10,11 +10,19 @@ function memo(fn) {
     cache[key] = fn.apply(this, args)
     return cache[key]
   }
+
+  const clear = function () {
+    cache = {}
+  }
+
+  return { memoizedFn, clear }
 }
 
-function sum(a, b, c) {
-  return a + b + c
-}
+let callCount = 0
+const { memoizedFn, clear } = memo(function (a, b) {
+  callCount++
+  return { ...a, ...b }
+})
 
-const memoizedSum = memo(sum)
-console.log(memoizedSum(1, 2, 3))
+console.log(memoizedFn({}, {}), callCount)
+console.log(memoizedFn({}, {}), callCount)

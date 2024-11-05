@@ -1,0 +1,43 @@
+{
+  // "extends":
+  "compilerOptions": {
+    "lib": ["DOM", "ESNext", "DOM.Iterable", "ESNext.AsyncIterable"],
+    "allowJs": false,
+    "allowSyntheticDefaultImports": true,
+    "alwaysStrict": false,
+    "baseUrl": ".",
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "jsx": "react",
+    "keyofStringsOnly": false,
+    "module": "amd",
+    "pretty": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "target": "ES5",
+    "paths": {
+      "*": ["*", "../*"],
+      "dojo/i18n!*": ["*", "../*", "src/tpc/*"],
+      "dojo/text!*": ["*", "../*", "src/tpc/*"],
+      "tpc/*": ["src/tpc/*"],
+      "gui-shared/*": [
+        "../../../../Common-Utilities/Common-Utilities-Javascript/*"
+      ],
+      "util/*": ["src/tpc/util/*"]
+    }
+  },
+  "include": ["src/tpc/**/*", "types/**/*"],
+  "exclude": [
+    "node_modules",
+    "src/tpc/nls/**/*",
+    "**/d3/**/*",
+    "**/dijit/**/*",
+    "**/dojo/**/*",
+    "**/dojox/**/*",
+    "**/evo/**/*",
+    "**/evox/**/*",
+    "**/gridx/**/*",
+    "../util/**/*"
+  ]
+}
