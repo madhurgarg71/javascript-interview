@@ -1,11 +1,51 @@
 class LRUCache {
   constructor(capacity) {
+    this.cache = new Map()
     this.capacity = capacity
   }
 
-  get(key) {}
+  evict(key) {
+    this.cache.forEach((v, k, m) => {
+      if (k !== key) {
+        this.cache.set(k, {
+          value: v.value,
+          priority: v.priority - 1,
+        })
+      }
+    })
 
-  put(key, value) {}
+    if (this.cache.size > this.capacity) {
+      const leastPriorityPair = Array.from(this.cache).sort(
+        (a, b) => a[1].priority - b[1].priority,
+      )[0]
+      // console.log("leastPriorityPair", leastPriorityPair[0])
+      this.cache.delete(leastPriorityPair[0])
+    }
+  }
+
+  get(key) {
+    //update priority of this key as highest
+    if (!this.cache.has(key)) {
+      return -1
+    }
+    const { value } = this.cache.get(key)
+    this.cache.set(key, {
+      value,
+      priority: this.capacity,
+    })
+    this.evict(key)
+    // console.log("cache", this.cache)
+    return this.cache.get(key)
+  }
+
+  put(key, value) {
+    this.cache.set(key, {
+      value,
+      priority: this.capacity,
+    })
+    this.evict(key)
+    console.log("cache", this.cache)
+  }
 }
 
 const lRUCache = new LRUCache(2)
