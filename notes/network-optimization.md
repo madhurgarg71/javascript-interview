@@ -1,5 +1,19 @@
 # Network Optimization Techniques
 
+## Async, Defer
+
+### `async`
+
+Downloads the javascript in parallel and execute once it's downloaded blocking the HTML parsing in between.
+
+`<script async src="app.js"></script>`
+
+### `defer`
+
+Downloads the javascript in parallel and
+execute once HTML parsing is done
+`<script defer src="app.js"></script>`
+
 ## Lazy loading
 
 ### `lazy` attribute:
@@ -8,7 +22,7 @@
 
 ### Intersection observer API:
 
-![alt text](image-3.png)
+<image width="200px" src="image-3.png">
 
 ```
 function callbackFunction(entries) {
@@ -24,7 +38,7 @@ let observer = new IntersectionObserver(callbackFunction, {
 
 ### `content-visibility` css property:
 
-![alt text](image-2.png)
+<image width="300px" src="image-2.png">
 
 ```
 .content {
@@ -34,7 +48,7 @@ let observer = new IntersectionObserver(callbackFunction, {
 
 ### Serving critical css
 
-![alt text](image-4.png)
+<image width="300px" src="image-4.png">
 
 ```
 Loading critical css synchronously
@@ -48,3 +62,13 @@ Loading CSS asynchronously with low priority
 ## Resource hinting
 
 ![alt text](image-5.png)
+
+### Preload
+
+Download the resources (css, js) in parallel and execute them once downloaded.
+
+`<link rel="preload" href="style.css">`
+<br />
+`<link rel="preload" href="critical.js">`
+
+### Prefetch
